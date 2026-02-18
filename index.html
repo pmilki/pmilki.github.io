@@ -33,7 +33,6 @@
     position: relative;
   }
 
-  /* Bubbles background */
   .bubbles-bg {
     position: fixed;
     inset: 0;
@@ -81,7 +80,6 @@
     gap: 36px;
   }
 
-  /* Can-inspired top header card */
   .header-card {
     width: 100%;
     background: linear-gradient(170deg, rgba(255,255,255,0.92) 0%, rgba(230,247,255,0.88) 100%);
@@ -111,7 +109,6 @@
     border-radius: 28px 28px 0 0;
   }
 
-  /* Moon decoration like the can */
   .moon-deco {
     position: absolute;
     right: 20px;
@@ -185,7 +182,6 @@
     font-weight: 500;
   }
 
-  /* Bubbles / badges */
   .badges {
     display: flex;
     flex-wrap: wrap;
@@ -205,7 +201,6 @@
     box-shadow: 0 2px 8px rgba(140,200,240,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
   }
 
-  /* Divider */
   .divider {
     width: 100%;
     height: 1px;
@@ -213,7 +208,6 @@
     opacity: 0.4;
   }
 
-  /* Section label */
   .section-title {
     font-size: 0.68rem;
     text-transform: uppercase;
@@ -224,7 +218,6 @@
     margin-bottom: 0;
   }
 
-  /* Links */
   .links {
     display: flex;
     flex-direction: column;
@@ -279,7 +272,6 @@
   }
   .link-card:hover .arrow { transform: translateX(3px); }
 
-  /* Drawing section */
   .draw-section {
     width: 100%;
     display: flex;
@@ -365,7 +357,6 @@
     accent-color: var(--sky-deep);
   }
 
-  /* Share area */
   .share-btn {
     padding: 13px 20px;
     border-radius: 14px;
@@ -438,7 +429,6 @@
   .copy-btn:hover { border-color: var(--sky-deep); background: var(--sky); }
   .copy-btn.copied { background: #e0f7ea; border-color: #81c784; color: #2e7d32; }
 
-  /* Footer */
   footer {
     font-size: 0.75rem;
     color: var(--text-muted);
@@ -446,7 +436,6 @@
     letter-spacing: 0.06em;
   }
 
-  /* Shared drawing banner */
   .shared-drawing-banner {
     display: none;
     width: 100%;
@@ -463,7 +452,6 @@
 
   .shared-drawing-banner.visible { display: block; }
 
-  /* Sparkle animations on load */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -483,15 +471,12 @@
 </head>
 <body>
 
-<!-- Floating bubbles background -->
 <div class="bubbles-bg" id="bubblesContainer"></div>
 
 <main>
 
-  <!-- Profile card (Milkis-can inspired) -->
   <div class="header-card">
     <span class="star-deco">✦</span>
-    <!-- Moon SVG like on the can -->
     <svg class="moon-deco" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M60 40C60 51.046 51.046 60 40 60C28.954 60 20 51.046 20 40C20 28.954 28.954 20 40 20" stroke="#2a6fa8" stroke-width="3" fill="none"/>
       <circle cx="50" cy="25" r="5" stroke="#2a6fa8" stroke-width="2" fill="none"/>
@@ -501,18 +486,17 @@
     <h1>milki<span>✦</span></h1>
     <span class="flavor-badge">refreshing · milk & yogurt flavor</span>
     <p class="tagline">gamer · small project dev · she/any</p>
-    <p class="bio">hi!! i'm milki. 👋 currently working on finding my identity! 🌐 feel free to add me on any of my socials below! ✨</p>
+    <p class="bio">hi!! i'm milki. 👋 feel free to add me on any of my socials below! ✨</p>
   </div>
 
   <div class="badges">
     <span class="badge">🌿 plants are cool</span>
-    <span class="badge">✨ she/any</span>
+    <span class="badge">🌐 discovering</span>
     <span class="badge">🥛 milky vibes</span>
   </div>
 
   <div class="divider"></div>
 
-  <!-- Socials -->
   <div class="links" style="width:100%">
     <p class="section-title">find me here</p>
     <a class="link-card" href="https://discord.com/users/pmilki" target="_blank" rel="noopener">
@@ -538,7 +522,6 @@
 
   <div class="divider"></div>
 
-  <!-- Drawing section -->
   <div class="draw-section">
     <p class="section-title">leave a drawing ✏️</p>
 
@@ -582,7 +565,6 @@
 </main>
 
 <script>
-  // --- Generate floating bubbles ---
   const container = document.getElementById('bubblesContainer');
   for (let i = 0; i < 28; i++) {
     const b = document.createElement('div');
@@ -599,7 +581,6 @@
     container.appendChild(b);
   }
 
-  // --- Canvas drawing ---
   const canvas = document.getElementById('drawCanvas');
   const ctx = canvas.getContext('2d');
 
