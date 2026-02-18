@@ -4,104 +4,224 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>milki ✦</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --pink: #f2a7c3;
-    --pink-soft: #fdf0f5;
-    --pink-mid: #f7d4e4;
-    --text: #2a1f2e;
-    --text-muted: #9b8fa8;
-    --bg: #fdfbfc;
-    --border: #f0e6ed;
+    --sky: #d6eeff;
+    --sky-mid: #b8dcf7;
+    --sky-deep: #8cc8f0;
+    --foam: #f0faff;
+    --white: #ffffff;
+    --silver: #e8f4fb;
+    --blue-text: #2a6fa8;
+    --blue-dark: #1a4f80;
+    --blue-mid: #4a90c4;
+    --bubble: rgba(255,255,255,0.7);
+    --text: #1e3a55;
+    --text-muted: #6a9cbf;
+    --border: rgba(140, 200, 240, 0.35);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--bg);
-    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(160deg, #e8f6ff 0%, #f5fbff 40%, #ddf0ff 100%);
+    font-family: 'Nunito', sans-serif;
     color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Bubbles background */
+  .bubbles-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(180,225,255,0.3));
+    border: 1px solid rgba(255,255,255,0.6);
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-110vh) scale(0.8); opacity: 0; }
+  }
+
+  /* Shimmer overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(200,235,255,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(180,220,255,0.3) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   main {
+    position: relative;
+    z-index: 1;
     max-width: 480px;
     margin: 0 auto;
-    padding: 72px 28px 80px;
+    padding: 60px 24px 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 36px;
   }
 
-  /* Header */
-  .header {
+  /* Can-inspired top header card */
+  .header-card {
+    width: 100%;
+    background: linear-gradient(170deg, rgba(255,255,255,0.92) 0%, rgba(230,247,255,0.88) 100%);
+    border: 1px solid rgba(200,235,255,0.8);
+    border-radius: 28px;
+    padding: 36px 28px 30px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 2px 0 rgba(255,255,255,0.9),
+      0 8px 32px rgba(140,200,240,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+    overflow: hidden;
   }
 
-  .avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: var(--pink-mid);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+  .header-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--sky-mid), var(--sky-deep), var(--sky-mid));
+    border-radius: 28px 28px 0 0;
+  }
+
+  /* Moon decoration like the can */
+  .moon-deco {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    width: 44px;
+    height: 44px;
+    opacity: 0.18;
+  }
+
+  .star-deco {
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    font-size: 1.1rem;
+    opacity: 0.25;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.15); }
+  }
+
+  .lotte-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
   }
 
   h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--text);
+    font-family: 'Pacifico', cursive;
+    font-size: 3.4rem;
+    color: var(--blue-dark);
     line-height: 1;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 8px rgba(100,180,240,0.3);
+  }
+
+  h1 span {
+    color: var(--blue-mid);
   }
 
   .tagline {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .flavor-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sky-mid), var(--sky-deep));
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 99px;
+    box-shadow: 0 2px 8px rgba(140,200,240,0.5);
   }
 
   .bio {
-    font-size: 0.97rem;
-    line-height: 1.75;
-    color: var(--text);
-    text-align: center;
-    max-width: 340px;
+    font-size: 0.94rem;
+    line-height: 1.8;
+    color: var(--blue-dark);
+    max-width: 320px;
+    font-weight: 500;
+  }
+
+  /* Bubbles / badges */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .badge {
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: rgba(255,255,255,0.75);
+    color: var(--blue-mid);
+    border: 1.5px solid rgba(140,200,240,0.5);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(140,200,240,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
   }
 
   /* Divider */
   .divider {
     width: 100%;
     height: 1px;
-    background: var(--border);
+    background: linear-gradient(90deg, transparent, var(--sky-deep), transparent);
+    opacity: 0.4;
   }
 
-  /* Badges */
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    justify-content: center;
-  }
-
-  .badge {
-    padding: 5px 14px;
-    border-radius: 99px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    background: var(--pink-soft);
-    color: #b06090;
-    border: 1px solid var(--pink-mid);
+  /* Section label */
+  .section-title {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    font-weight: 700;
+    align-self: flex-start;
+    margin-bottom: -24px;
   }
 
   /* Links */
@@ -112,50 +232,52 @@
     width: 100%;
   }
 
-  .section-title {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-
   .link-card {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 14px 18px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    border: 1.5px solid rgba(180,225,255,0.5);
+    border-radius: 18px;
     text-decoration: none;
     color: var(--text);
-    background: white;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    font-weight: 500;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    font-weight: 600;
     font-size: 0.95rem;
+    box-shadow: 0 2px 12px rgba(140,200,240,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
   .link-card:hover {
-    border-color: var(--pink);
-    box-shadow: 0 2px 16px rgba(242,167,195,0.2);
+    border-color: var(--sky-deep);
+    box-shadow: 0 4px 20px rgba(140,200,240,0.35), inset 0 1px 0 rgba(255,255,255,0.9);
+    transform: translateY(-2px);
   }
 
   .link-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: var(--pink-soft);
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--sky), var(--sky-mid));
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     font-size: 1.1rem;
+    box-shadow: 0 2px 6px rgba(140,200,240,0.3);
   }
 
   .link-meta { flex: 1; }
-  .link-platform { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
-  .link-name { font-weight: 600; font-size: 0.95rem; }
+  .link-platform { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .link-name { font-weight: 700; font-size: 0.95rem; color: var(--blue-dark); }
+
+  .arrow {
+    color: var(--sky-deep);
+    font-size: 1rem;
+    transition: transform 0.15s;
+  }
+  .link-card:hover .arrow { transform: translateX(3px); }
 
   /* Drawing section */
   .draw-section {
@@ -167,11 +289,12 @@
 
   .canvas-wrap {
     position: relative;
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    border: 1.5px solid rgba(180,225,255,0.6);
+    border-radius: 20px;
     overflow: hidden;
     background: white;
     cursor: crosshair;
+    box-shadow: 0 4px 20px rgba(140,200,240,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
   #drawCanvas {
@@ -183,8 +306,13 @@
   .draw-tools {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(180,225,255,0.5);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
   }
 
   .colors {
@@ -201,67 +329,68 @@
     cursor: pointer;
     transition: transform 0.15s, border-color 0.15s;
     flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
   }
 
-  .color-btn:hover { transform: scale(1.15); }
-  .color-btn.active { border-color: var(--text); }
+  .color-btn:hover { transform: scale(1.2); }
+  .color-btn.active { border-color: var(--blue-dark); transform: scale(1.1); }
 
   .tool-btn {
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 99px;
-    border: 1px solid var(--border);
+    border: 1.5px solid rgba(180,225,255,0.6);
     background: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--blue-mid);
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: all 0.15s;
   }
 
   .tool-btn:hover {
-    border-color: var(--pink);
-    background: var(--pink-soft);
+    border-color: var(--sky-deep);
+    background: var(--sky);
   }
 
   .tool-btn.active {
-    background: var(--pink-soft);
-    border-color: var(--pink);
-    color: #b06090;
+    background: linear-gradient(135deg, var(--sky-mid), var(--sky-deep));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 2px 8px rgba(140,200,240,0.4);
   }
 
   .size-slider {
-    width: 70px;
-    accent-color: var(--pink);
+    width: 64px;
+    accent-color: var(--sky-deep);
   }
 
   /* Share area */
-  .share-area {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   .share-btn {
-    padding: 12px 20px;
-    border-radius: 12px;
+    padding: 13px 20px;
+    border-radius: 14px;
     border: none;
-    background: var(--pink-mid);
-    color: #7a3060;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--sky-mid) 0%, var(--sky-deep) 100%);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.15s;
+    transition: all 0.2s;
     width: 100%;
+    box-shadow: 0 4px 16px rgba(140,200,240,0.45);
+    letter-spacing: 0.02em;
   }
 
-  .share-btn:hover { background: #f0c8db; }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140,200,240,0.55);
+  }
 
   .share-link-wrap {
     display: none;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .share-link-wrap.visible { display: flex; }
@@ -269,7 +398,7 @@
   .share-note {
     font-size: 0.78rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    font-weight: 600;
   }
 
   .share-link-box {
@@ -281,12 +410,12 @@
   .share-link-input {
     flex: 1;
     padding: 9px 12px;
-    border: 1px solid var(--border);
+    border: 1.5px solid rgba(180,225,255,0.6);
     border-radius: 10px;
     font-size: 0.78rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: var(--text-muted);
-    background: white;
+    background: rgba(255,255,255,0.8);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -295,51 +424,82 @@
   .copy-btn {
     padding: 9px 14px;
     border-radius: 10px;
-    border: 1px solid var(--border);
+    border: 1.5px solid rgba(180,225,255,0.6);
     background: white;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
     white-space: nowrap;
+    color: var(--blue-mid);
   }
 
-  .copy-btn:hover { border-color: var(--pink); background: var(--pink-soft); }
-  .copy-btn.copied { background: #e8f5e9; border-color: #a5d6a7; color: #388e3c; }
+  .copy-btn:hover { border-color: var(--sky-deep); background: var(--sky); }
+  .copy-btn.copied { background: #e0f7ea; border-color: #81c784; color: #2e7d32; }
 
   /* Footer */
   footer {
     font-size: 0.75rem;
     color: var(--text-muted);
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
   }
 
-  /* If arriving via a shared drawing link */
+  /* Shared drawing banner */
   .shared-drawing-banner {
     display: none;
     width: 100%;
-    background: var(--pink-soft);
-    border: 1px solid var(--pink-mid);
-    border-radius: 14px;
-    padding: 16px 18px;
+    background: rgba(255,255,255,0.75);
+    border: 1.5px solid rgba(180,225,255,0.6);
+    border-radius: 16px;
+    padding: 14px 18px;
     font-size: 0.88rem;
-    color: #b06090;
+    color: var(--blue-mid);
     text-align: center;
-    line-height: 1.6;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
   }
 
   .shared-drawing-banner.visible { display: block; }
-  .shared-drawing-banner strong { font-weight: 700; }
+
+  /* Sparkle animations on load */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  main > * {
+    animation: fadeInUp 0.5s ease both;
+  }
+  main > *:nth-child(1) { animation-delay: 0.05s; }
+  main > *:nth-child(2) { animation-delay: 0.12s; }
+  main > *:nth-child(3) { animation-delay: 0.18s; }
+  main > *:nth-child(4) { animation-delay: 0.24s; }
+  main > *:nth-child(5) { animation-delay: 0.30s; }
+  main > *:nth-child(6) { animation-delay: 0.36s; }
+  main > *:nth-child(7) { animation-delay: 0.42s; }
 </style>
 </head>
 <body>
+
+<!-- Floating bubbles background -->
+<div class="bubbles-bg" id="bubblesContainer"></div>
+
 <main>
 
-  <!-- Profile -->
-  <div class="header">
-    <div class="avatar">🌸</div>
-    <h1>milki</h1>
+  <!-- Profile card (Milkis-can inspired) -->
+  <div class="header-card">
+    <span class="star-deco">✦</span>
+    <!-- Moon SVG like on the can -->
+    <svg class="moon-deco" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60 40C60 51.046 51.046 60 40 60C28.954 60 20 51.046 20 40C20 28.954 28.954 20 40 20" stroke="#2a6fa8" stroke-width="3" fill="none"/>
+      <circle cx="50" cy="25" r="5" stroke="#2a6fa8" stroke-width="2" fill="none"/>
+    </svg>
+
+    <span class="lotte-tag">● original</span>
+    <h1>milki<span>✦</span></h1>
+    <span class="flavor-badge">refreshing · milk & yogurt flavor</span>
     <p class="tagline">gamer · small project dev · she/any</p>
     <p class="bio">hi!! i'm milki 👋 i'm figuring some things out 🌿 feel free to add me on any of my socials below!</p>
   </div>
@@ -348,6 +508,7 @@
     <span class="badge">🎮 games yes</span>
     <span class="badge">🌿 plants are cool</span>
     <span class="badge">✨ she/any</span>
+    <span class="badge">🥛 milky vibes</span>
   </div>
 
   <div class="divider"></div>
@@ -363,16 +524,16 @@
         <div class="link-platform">Discord</div>
         <div class="link-name">pmilki</div>
       </div>
-      <span style="color:var(--text-muted); font-size:0.9rem;">→</span>
+      <span class="arrow">→</span>
     </a>
 
     <a class="link-card" href="https://www.roblox.com/users/7653720053" target="_blank" rel="noopener">
-      <div class="link-icon" style="font-size:1.2rem;">🎮</div>
+      <div class="link-icon">🎮</div>
       <div class="link-meta">
         <div class="link-platform">Roblox</div>
         <div class="link-name">permilki</div>
       </div>
-      <span style="color:var(--text-muted); font-size:0.9rem;">→</span>
+      <span class="arrow">→</span>
     </a>
   </div>
 
@@ -393,13 +554,13 @@
 
     <div class="draw-tools">
       <div class="colors">
-        <button class="color-btn active" data-color="#2a1f2e" style="background:#2a1f2e;" title="dark"></button>
-        <button class="color-btn" data-color="#f2a7c3" style="background:#f2a7c3;" title="pink"></button>
+        <button class="color-btn active" data-color="#1a4f80" style="background:#1a4f80;" title="navy"></button>
+        <button class="color-btn" data-color="#8cc8f0" style="background:#8cc8f0;" title="sky blue"></button>
         <button class="color-btn" data-color="#a78bfa" style="background:#a78bfa;" title="lavender"></button>
         <button class="color-btn" data-color="#6ee7b7" style="background:#6ee7b7;" title="mint"></button>
         <button class="color-btn" data-color="#fbbf24" style="background:#fbbf24;" title="yellow"></button>
-        <button class="color-btn" data-color="#60a5fa" style="background:#60a5fa;" title="blue"></button>
-        <button class="color-btn" data-color="#ffffff" style="background:#ffffff; border-color:#e0d0da;" title="white"></button>
+        <button class="color-btn" data-color="#f2a7c3" style="background:#f2a7c3;" title="pink"></button>
+        <button class="color-btn" data-color="#ffffff" style="background:#ffffff; border-color:#cce6f7;" title="white"></button>
       </div>
       <input type="range" class="size-slider" id="sizeSlider" min="2" max="24" value="5" title="brush size">
       <button class="tool-btn active" id="penBtn">pen</button>
@@ -407,37 +568,50 @@
       <button class="tool-btn" id="clearBtn">clear</button>
     </div>
 
-    <div class="share-area">
-      <button class="share-btn" id="shareBtn">✨ generate shareable link</button>
-      <div class="share-link-wrap" id="shareLinkWrap">
-        <p class="share-note">copy this link and send it to me to share your masterpiece!</p>
-        <div class="share-link-box">
-          <input class="share-link-input" id="shareLinkInput" readonly>
-          <button class="copy-btn" id="copyBtn">copy</button>
-        </div>
+    <button class="share-btn" id="shareBtn">✨ generate shareable link</button>
+    <div class="share-link-wrap" id="shareLinkWrap">
+      <p class="share-note">copy this link and send it to milki to share your masterpiece!</p>
+      <div class="share-link-box">
+        <input class="share-link-input" id="shareLinkInput" readonly>
+        <button class="copy-btn" id="copyBtn">copy</button>
       </div>
     </div>
   </div>
 
-  <footer>made with 💕 by milki</footer>
+  <footer>made with 💙 by milki</footer>
 
 </main>
 
 <script>
+  // --- Generate floating bubbles ---
+  const container = document.getElementById('bubblesContainer');
+  for (let i = 0; i < 28; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 6 + Math.random() * 22;
+    b.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      bottom: -${size}px;
+      animation-duration: ${8 + Math.random() * 16}s;
+      animation-delay: ${Math.random() * 14}s;
+    `;
+    container.appendChild(b);
+  }
+
+  // --- Canvas drawing ---
   const canvas = document.getElementById('drawCanvas');
   const ctx = canvas.getContext('2d');
 
-  // Fill white bg
   function fillBg() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
   fillBg();
 
-  let drawing = false;
-  let erasing = false;
-  let currentColor = '#2a1f2e';
-  let currentSize = 5;
+  let drawing = false, erasing = false;
+  let currentColor = '#1a4f80', currentSize = 5;
   let lastX = 0, lastY = 0;
 
   function getPos(e) {
@@ -445,19 +619,12 @@
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
     if (e.touches) {
-      return [
-        (e.touches[0].clientX - rect.left) * scaleX,
-        (e.touches[0].clientY - rect.top) * scaleY
-      ];
+      return [(e.touches[0].clientX - rect.left) * scaleX, (e.touches[0].clientY - rect.top) * scaleY];
     }
     return [(e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY];
   }
 
-  function startDraw(e) {
-    e.preventDefault();
-    drawing = true;
-    [lastX, lastY] = getPos(e);
-  }
+  function startDraw(e) { e.preventDefault(); drawing = true; [lastX, lastY] = getPos(e); }
 
   function draw(e) {
     e.preventDefault();
@@ -484,7 +651,6 @@
   canvas.addEventListener('touchmove', draw, { passive: false });
   canvas.addEventListener('touchend', stopDraw);
 
-  // Color buttons
   document.querySelectorAll('.color-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
@@ -496,12 +662,8 @@
     });
   });
 
-  // Size
-  document.getElementById('sizeSlider').addEventListener('input', e => {
-    currentSize = parseInt(e.target.value);
-  });
+  document.getElementById('sizeSlider').addEventListener('input', e => { currentSize = parseInt(e.target.value); });
 
-  // Pen/erase/clear
   document.getElementById('penBtn').addEventListener('click', () => {
     erasing = false;
     document.getElementById('penBtn').classList.add('active');
@@ -514,14 +676,9 @@
     document.getElementById('penBtn').classList.remove('active');
   });
 
-  document.getElementById('clearBtn').addEventListener('click', () => {
-    fillBg();
-  });
+  document.getElementById('clearBtn').addEventListener('click', fillBg);
 
-  // Share: encode canvas as base64 in URL hash
   document.getElementById('shareBtn').addEventListener('click', () => {
-    const dataUrl = canvas.toDataURL('image/png');
-    // Compress by using jpeg
     const jpegUrl = canvas.toDataURL('image/jpeg', 0.5);
     const encoded = btoa(jpegUrl);
     const shareUrl = window.location.origin + window.location.pathname + '#drawing=' + encoded;
@@ -535,14 +692,10 @@
       const btn = document.getElementById('copyBtn');
       btn.textContent = 'copied!';
       btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'copy';
-        btn.classList.remove('copied');
-      }, 2000);
+      setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
     });
   });
 
-  // On load: check for shared drawing in URL hash
   window.addEventListener('load', () => {
     const hash = window.location.hash;
     if (hash.startsWith('#drawing=')) {
@@ -550,15 +703,10 @@
         const encoded = hash.slice('#drawing='.length);
         const dataUrl = atob(encoded);
         const img = new Image();
-        img.onload = () => {
-          fillBg();
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
+        img.onload = () => { fillBg(); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); };
         img.src = dataUrl;
         document.getElementById('sharedBanner').classList.add('visible');
-      } catch(e) {
-        // bad hash, ignore
-      }
+      } catch(e) {}
     }
   });
 </script>
